@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "pretty": true,
+    "sourceMap": true,
+    "outDir": "bin",
+    "importHelpers": false,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["types/*"],
+      "@modules": [
+        "./src/modules/index.ts"
+      ],
+      "@services": [
+        "./src/app/services/index.ts"
+      ],
+      "@controllers": [
+        "./src/app/controllers/index.ts"
+      ]
+    },
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
