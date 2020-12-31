@@ -1,5 +1,10 @@
 {
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
     "rules": {
-        "no-unreachable": true
-    }
+     },
+    "rulesDirectory": []
 }
