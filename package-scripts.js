@@ -11,7 +11,7 @@ module.exports = {
      * Starts the builded app from the dist directory
      */
     start: {
-      script: 'node bin/app.js',
+      script: 'node bin/index.js',
       description: 'Starts the builded app from the dist directory'
     },
     /**
@@ -40,7 +40,8 @@ module.exports = {
         'nps banner.build',
         'nps lint',
         'nps clean.bin',
-        'nps transpile'
+        'nps transpile',
+        'nps transformPath'
       ),
       description: 'Builds the app into the bin directory'
     },
@@ -57,6 +58,12 @@ module.exports = {
     transpile: {
       script: `tsc`,
       hiddenFromHelp: true
+    },
+    /**
+     * Transfrom typescript path alias
+     */
+    transformPath : {
+      script: `tscpaths -p tsconfig.json -s ./src -o ./bin`
     },
     /**
      * Clean files and folders

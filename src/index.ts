@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { bootstrapMicroframework } from 'microbootstrap';
-import { LoggerModule, ConfigurationModule } from '@modules';
+import { LoggerModule, ConfigurationModule } from '@modules/index';
 import { log } from 'winston';
-import { ErrorHandler } from '@middlewares';
+import { ErrorHandler } from '@middlewares/index';
 
 bootstrapMicroframework({
     config: {
