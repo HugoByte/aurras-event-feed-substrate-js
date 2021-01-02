@@ -1,12 +1,16 @@
-import { BaseException, InvalidConfigurationException } from '@exceptions';
+import { Exception, ConfigurationException } from '@exceptions';
 import { createLogger, transports, format } from "winston";
+
 /**
  * Central Error Handling Logic.
  */
+
 class ErrorHandlerMiddleware {
-    public async handleError(err: BaseException): Promise<void> {
+
+    public async handleError(error: Exception): Promise<void> {
+
         // Build a custom logger to handle configuration error as the logger transports will be added only after the validating the configration. Without this winston will throw `Attempt to write logs with no transports`.
-        if(err instanceof InvalidConfigurationException) {
+        if(error instanceof ConfigurationException) {
             const logger = createLogger(
                 {
                     transports: [
@@ -23,11 +27,12 @@ class ErrorHandlerMiddleware {
                     ],
                 }
             );
-            logger.log("error", err.message);
+            logger.log("error", error.message);
         }
+
         // Exit the process if the error is not operational.
         // TODO: Emit event and shutdown process through bootstrap framework to handle shutdown handlers.
-        if(!err.isOperational) {
+        if(!error.isOperational) {
             return process.exit(1);
         }
     }

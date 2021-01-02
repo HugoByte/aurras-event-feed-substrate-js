@@ -3,6 +3,7 @@ import { bootstrapMicroframework } from 'microbootstrap';
 import { LoggerModule, ConfigurationModule } from '@modules';
 import { log } from 'winston';
 import { ErrorHandler } from '@middlewares';
+
 bootstrapMicroframework({
     config: {
         logo: 'Event Feed',
