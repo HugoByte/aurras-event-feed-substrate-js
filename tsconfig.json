@@ -17,16 +17,24 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "baseUrl": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "paths": {
       "*": ["types/*"],
       "@modules": [
         "./src/modules/index.ts"
       ],
       "@services": [
-        "./src/app/services/index.ts"
+        "./src/services/index.ts"
       ],
       "@controllers": [
-        "./src/app/controllers/index.ts"
+        "./src/controllers/index.ts"
+      ],
+      "@middlewares": [
+        "./src/middlewares/index.ts"
+      ],
+      "@exceptions": [
+        "./src/exceptions/index.ts"
       ]
     },
     "allowSyntheticDefaultImports": true,
