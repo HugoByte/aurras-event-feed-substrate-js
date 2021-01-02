@@ -6,7 +6,6 @@ import { Exception } from './exception';
  */
 
 export class ConfigurationException extends Exception {
-
   constructor(description) {
     super('ConfigurationException', description, false);
   }

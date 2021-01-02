@@ -6,9 +6,7 @@ import { createLogger, transports, format } from "winston";
  */
 
 class ErrorHandlerMiddleware {
-
     public async handleError(error: Exception): Promise<void> {
-
         // Build a custom logger to handle configuration error as the logger transports will be added only after the validating the configration. Without this winston will throw `Attempt to write logs with no transports`.
         if(error instanceof ConfigurationException) {
             const logger = createLogger(
@@ -27,6 +25,7 @@ class ErrorHandlerMiddleware {
                     ],
                 }
             );
+
             logger.log("error", error.message);
         }
 
@@ -37,4 +36,5 @@ class ErrorHandlerMiddleware {
         }
     }
 }
+
 export const ErrorHandler = new ErrorHandlerMiddleware();

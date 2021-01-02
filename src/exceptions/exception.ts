@@ -3,7 +3,6 @@
  */
 
 export abstract class Exception extends Error {
-
     public readonly name: string;
     public readonly isOperational: boolean | undefined;
     public readonly description: string;

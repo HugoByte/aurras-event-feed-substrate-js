@@ -11,7 +11,6 @@ import { ConfigurationException } from "@exceptions";
  */
 
 export const ConfigurationModule: MicroframeworkLoader = (frameworkSettings: MicroframeworkSettings | undefined) => {
-    
     if (frameworkSettings) {
         // Build Yup schema from the provided json schema.
         const yupSchema = buildYup(jsonSchema, {});
