@@ -4,7 +4,7 @@
     "module": "commonjs",
     "pretty": true,
     "sourceMap": true,
-    "outDir": "bin",
+    "outDir": "./bin",
     "importHelpers": false,
     "strict": true,
     "noImplicitAny": false,
@@ -16,25 +16,27 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
-      "*": ["types/*"],
-      "@modules": [
-        "./src/modules/index.ts"
+      "*": [
+        "types/*"
       ],
-      "@services": [
-        "./src/services/index.ts"
+      "@modules/*": [
+        "./modules/*"
       ],
-      "@controllers": [
-        "./src/controllers/index.ts"
+      "@services/*": [
+        "./services/*"
       ],
-      "@middlewares": [
-        "./src/middlewares/index.ts"
+      "@controllers/*": [
+        "./controllers/*"
       ],
-      "@exceptions": [
-        "./src/exceptions/index.ts"
+      "@middlewares/*": [
+        "./middlewares/*"
+      ],
+      "@exceptions/*": [
+        "./exceptions/*"
       ]
     },
     "allowSyntheticDefaultImports": true,
@@ -43,5 +45,8 @@
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "../config"
   ]
 }

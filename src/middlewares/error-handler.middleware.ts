@@ -1,4 +1,4 @@
-import { Exception, ConfigurationException } from '@exceptions';
+import { Exception, ConfigurationException } from '@exceptions/index';
 import { createLogger, transports, format } from "winston";
 
 /**

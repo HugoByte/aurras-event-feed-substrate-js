@@ -1,8 +1,9 @@
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microbootstrap';
 import { util } from 'config';
 import { buildYup } from 'schema-to-yup';
-import * as jsonSchema from '../../config/schema.json';
-import { ConfigurationException } from "@exceptions";
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { ConfigurationException } from "@exceptions/index";
 
 /**
  * Configuration Module validates the config passed through environment variables with the schema provided in /config/schema.json.
@@ -12,11 +13,19 @@ import { ConfigurationException } from "@exceptions";
 
 export const ConfigurationModule: MicroframeworkLoader = (frameworkSettings: MicroframeworkSettings | undefined) => {
     if (frameworkSettings) {
-        // Build Yup schema from the provided json schema.
-        const yupSchema = buildYup(jsonSchema, {});
+        try {
+            // Read schema.json file from config directory.
+            const schema = JSON.parse(readFileSync(join('config', 'schema.json'), { encoding: 'utf8' }));
 
-        // Using synchronous validation as we need to be sure that configuration are valid before loading other modules.
-        try { yupSchema.validateSync(util.loadFileConfigs()) }
-        catch (error) { throw new ConfigurationException(error.message); }
+            // Build Yup schema from the provided json schema.
+            const yupSchema = buildYup(schema, {});
+
+            // Using synchronous validation as we need to be sure that configuration are valid before loading other modules.
+            yupSchema.validateSync(util.loadFileConfigs());
+        }
+        catch (error) {
+            if(typeof error === 'string') throw new ConfigurationException(error);
+            throw new ConfigurationException(error.message);
+        }
     }
 }
