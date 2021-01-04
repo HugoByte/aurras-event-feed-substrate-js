@@ -47,6 +47,7 @@
     "src/**/*"
   ],
   "exclude": [
-    "../config"
+    "config",
+    "tests/**/*"
   ]
 }
