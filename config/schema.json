@@ -4,13 +4,62 @@
     "type": "object",
     "title": "Substrate Event Feed Config",
     "properties": {
-        "name": {
+        "chain": {
             "description": "Name of the chain",
             "type": "string",
-            "required": true,
             "matches": "[a-zA-Z]+",
             "min": 3,
             "maxLength": 40
+        },
+        "loggers": {
+            "type": "object",
+            "properties": {
+                "console": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "level": {
+                            "type": "string",
+                            "enum": [
+                                "info",
+                                "debug",
+                                "error",
+                                "warning"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "level"
+                    ]
+                },
+                "file": {
+                    "type": "object",
+                    "properties": {
+                        "level": {
+                            "type": "string",
+                            "enum": [
+                                "info",
+                                "debug",
+                                "error",
+                                "warning"
+                            ]
+                        },
+                        "location": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "level",
+                        "location"
+                    ]
+                }
+            }
         }
-    }
+    },
+    "required": [
+        "chain",
+        "loggers"
+    ]
 }

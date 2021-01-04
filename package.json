@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "config": "^3.3.3",
+    "lodash": "^4.17.20",
     "microframework-w3tec": "^0.6.3",
     "reflect-metadata": "^0.1.13",
     "schema-to-yup": "^1.10.0",
