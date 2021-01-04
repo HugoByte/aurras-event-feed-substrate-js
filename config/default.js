@@ -6,19 +6,25 @@ module.exports = {
     chain: undefined,
 
     // Loggers config fetched through environment variable
-    loggers_config: undefined,
+    loggerConfigurations: undefined,
+    
+    /**
+     * TODO: Since the limitation of json schema-to-yup not supporting array validation as we wanted
+     * we are forced to add the make object than array. Once we add array handle to schema-to-yup
+     * we can fix the below transformer to have different loggers and array with key value pair.
+     */
 
     // Transform the config fetched through environment variable
     loggers: defer(function () {
         // Split loggers config to get indepndent logger
-        var loggers = _.split(_.trim(this.loggers_config), ";");
+        var loggers = _.split(_.trim(this.loggerConfigurations), ";");
 
-        loggers = _.reduce(loggers, function (object, item) {
+        loggers = _.reduce(loggers, function (object, loggerConfiguration) {
             // Return the accumulator if the value is empty.
-            if (_.isEmpty(item)) return object;
+            if (_.isEmpty(loggerConfiguration)) return object;
 
             // Get logger options
-            const logger = _.reduce(_.split(item, ","), function (object, item, index) {
+            const logger = _.reduce(_.split(loggerConfiguration, ","), function (object, item, index) {
                 // Return the accumulator if the value is empty.
                 if (_.isEmpty(item)) return object;
 

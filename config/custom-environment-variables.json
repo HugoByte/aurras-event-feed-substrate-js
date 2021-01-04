@@ -1,4 +1,4 @@
 {
     "chain": "CHAIN_ENDPOINT",
-    "loggers_config": "LOGGERS"
+    "loggerConfigurations": "LOGGERS"
 }
