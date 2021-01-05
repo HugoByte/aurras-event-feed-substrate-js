@@ -9,7 +9,6 @@ import { configure, format, transports } from 'winston';
 export const LoggerModule: MicroframeworkLoader = (frameworkSettings: MicroframeworkSettings | undefined) => {
     if (frameworkSettings) {
         // TODO: Build transports using configuration provided through environment variable.
-        // Configure the logger
         configure({
             transports: [
                 new transports.Console({
