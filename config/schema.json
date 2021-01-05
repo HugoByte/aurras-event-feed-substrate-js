@@ -4,7 +4,7 @@
     "type": "object",
     "title": "Substrate Event Feed Config",
     "properties": {
-        "chain": {
+        "chainName": {
             "description": "Name of the chain",
             "type": "string",
             "matches": "[a-zA-Z]+",
@@ -56,10 +56,16 @@
                     ]
                 }
             }
+        },
+        "chainEndpoint" :{
+            "description": "Websocket endpoint of the chain node",
+            "type": "string",
+            "pattern": "^(ws|wss)://"
         }
     },
     "required": [
-        "chain",
-        "loggers"
+        "chainName",
+        "loggers",
+        "chainEndpoint"
     ]
 }
