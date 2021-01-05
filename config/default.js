@@ -3,8 +3,10 @@ const _ = require('lodash');
 
 module.exports = {
     // Name of the chain
-    chain: undefined,
+    chain_name: undefined,
 
+    chain_endpoint: undefined,
+    
     // Loggers config fetched through environment variable
     loggerConfigurations: undefined,
     
