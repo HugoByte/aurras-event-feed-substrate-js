@@ -1,5 +1,5 @@
 {
-    "chain_name": "CHAIN_NAME",
-    "chain_endpoint": "CHAIN_ENDPOINT",
+    "chainName": "CHAIN_NAME",
+    "chainEndpoint": "CHAIN_ENDPOINT",
     "loggerConfigurations": "LOGGERS"
 }
