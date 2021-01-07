@@ -70,12 +70,12 @@ describe('Validate schema configuration', () => {
     });
 });
 
-describe('Configuration helper Unit Tests', () => {
-    test('[loggersHelper] No loggers', () => {
+describe('Configuration Helper Unit Tests', () => {
+    test('Can parse the empty logger configuration', () => {
         expect(loggersHelper(undefined)).toStrictEqual({});
     });
 
-    test('[loggersHelper] console logger with error level', () => {
+    test('Can parse the console logger configuration', () => {
         expect(loggersHelper("console,error")).toStrictEqual({
             console: {
                 enabled: true,
@@ -84,7 +84,7 @@ describe('Configuration helper Unit Tests', () => {
         });
     });
 
-    test('[loggersHelper] file logger with error level and  c:/ as location', () => {
+    test('Can parse file logger configuration and log location', () => {
         expect(loggersHelper("file,error,c:/logs,")).toStrictEqual({
             file: {
                 enabled: true,
@@ -94,18 +94,18 @@ describe('Configuration helper Unit Tests', () => {
         });
     });
 
-    test('[excludesHelper] No excludes provided', () => {
+    test('Can parse empty excludes in configuration', () => {
         expect(excludesHelper(undefined)).toStrictEqual([]);
     });
 
-    test('[excludesHelper] Complete section to exclude', () => {
+    test('Can parse the section to exclude', () => {
         expect(excludesHelper("balances")).toStrictEqual([{
             section: "balances",
             methods: undefined
         }]);
     });
 
-    test('[excludesHelper] Certain methods of the section to exclude', () => {
+    test('Can parse the section and methods', () => {
         expect(excludesHelper("balances=transfer,accounts,;")).toStrictEqual([{
             section: "balances",
             methods: [
@@ -115,18 +115,18 @@ describe('Configuration helper Unit Tests', () => {
         }]);
     });
 
-    test('[typesHelper] Custom types provided to inject while chain intialization', () => {
+    test('Can read the custom types', () => {
         expect(typesHelper("tests/mock/types.json")).toStrictEqual({
             Address: "AccountId",
             LookupSource: "AccountId"
         });
     })
 
-    test('[typesHelper] Custom types provided does not exist', () => {
+    test('Can throw error for invalid JSON', () => {
         expect(() => typesHelper("tests/mock/types-invalid.json")).toThrow();
     })
 
-    test('[typesHelper] Throw error if invalid json provided', () => {
+    test('Can return undefined for unavailable file', () => {
         expect(typesHelper("tests/mock/types-unavailable.json")).toEqual(undefined);
     })
 });
