@@ -1,5 +1,5 @@
 const defer = require('config/defer').deferConfig;
-const { loggersHelper } = require('./helper');
+const { loggersHelper, excludesHelper } = require('./helper');
 
 module.exports = {
     // Name of the chain
@@ -17,7 +17,14 @@ module.exports = {
      */
 
     // Transform the config fetched through environment variable
-    loggers: defer(function() {
-        return loggersHelper(this.loggerConfigurations) 
+    loggers: defer(function () {
+        return loggersHelper(this.loggerConfigurations)
+    }),
+
+    // Section Methods to exclude fetched through environment variable
+    sectionMethodExcludes: undefined,
+
+    excludes: defer(function () {
+        return excludesHelper(this.sectionMethodExcludes)
     })
 }

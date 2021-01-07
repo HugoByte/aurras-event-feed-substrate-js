@@ -36,10 +36,35 @@ module.exports = {
                 return object;
             }, {});
 
-            // 
             return _.assign(object, logger);
         }, {});
 
         return loggers;
+    },
+
+    excludesHelper: function (sectionMethodExcludes) {
+        // Split loggers config to get indepndent logger
+        var sections = _.split(_.trim(sectionMethodExcludes), ";");
+
+        sections = _.reduce(sections, function (object, sectionMethodExclude) {
+            // Return the accumulator if the value is empty.
+            if (_.isEmpty(sectionMethodExclude)) return object;
+
+            //Split to get section and its method sectionMethodExcludeSplit[0] will be the section and if only specific methods need to be excluded, sectionMethodExcludeSplit[1] will be method collection
+            const sectionMethodExcludeSplit = _.split(_.trim(sectionMethodExclude), "=");
+            const section = sectionMethodExcludeSplit[0];
+            const methods = sectionMethodExcludeSplit[1] ? _.filter(_.split(_.trim(sectionMethodExcludeSplit[1]), ","), function (value) {
+                return !_.isEmpty(value);
+            }) : undefined;
+
+            object.push({
+                section,
+                methods
+            });
+
+            return object;
+        }, []);
+
+        return sections;
     }
 }

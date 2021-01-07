@@ -1,7 +1,7 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
 import { ConfigurationException } from '../src/exceptions';
 import { MicroframeworkSettings } from 'microbootstrap';
-import { loggersHelper } from '../config/helper';
+import { loggersHelper, excludesHelper } from '../config/helper';
 
 const configuration = ConfigurationModule;
 
@@ -92,6 +92,27 @@ describe('Configuration helper Unit Tests', () => {
                 location: "c:/logs"
             }
         });
+    });
+
+    test('[excludesHelper] No excludes', () => {
+        expect(excludesHelper(undefined)).toStrictEqual([]);
+    });
+
+    test('[excludesHelper] Complete section to exclude', () => {
+        expect(excludesHelper("balances")).toStrictEqual([{
+            section: "balances",
+            methods: undefined
+        }]);
+    });
+
+    test('[excludesHelper] Certain methods of the section to exclude', () => {
+        expect(excludesHelper("balances=transfer,accounts,;")).toStrictEqual([{
+            section: "balances",
+            methods: [
+                "transfer",
+                "accounts"
+            ]
+        }]);
     });
 });
 
