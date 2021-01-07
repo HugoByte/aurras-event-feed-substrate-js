@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { bootstrapMicroframework } from 'microbootstrap';
-import { LoggerModule, ConfigurationModule } from '@modules/index';
+import { LoggerModule, ConfigurationModule, ChainModule } from '@modules/index';
 import { log } from 'winston';
 import { ErrorHandler } from '@middlewares/index';
 
@@ -12,6 +12,7 @@ bootstrapMicroframework({
     loaders: [
         ConfigurationModule,
         LoggerModule,
+        ChainModule
     ],
 })
     .then((framework) => {
