@@ -1,6 +1,7 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
 import { ConfigurationException } from '../src/exceptions';
 import { MicroframeworkSettings } from 'microbootstrap';
+import { loggersHelper } from '../config/helper';
 
 const configuration = ConfigurationModule;
 
@@ -66,6 +67,31 @@ describe('Validate schema configuration', () => {
         }
 
         expect(() => validateConfiguration({ schema, configuration })).toThrow();
-    })
+    });
+});
+
+describe('Configuration helper Unit Tests', () => {
+    test('[loggersHelper] No loggers', () => {
+        expect(loggersHelper(undefined)).toStrictEqual({});
+    });
+
+    test('[loggersHelper] console logger with error level', () => {
+        expect(loggersHelper("console,error")).toStrictEqual({
+            console: {
+                enabled: true,
+                level: "error"
+            }
+        });
+    });
+
+    test('[loggersHelper] file logger with error level and  c:/ as location', () => {
+        expect(loggersHelper("file,error,c:/logs,")).toStrictEqual({
+            file: {
+                enabled: true,
+                level: "error",
+                location: "c:/logs"
+            }
+        });
+    });
 });
 
