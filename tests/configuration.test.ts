@@ -1,6 +1,7 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
 import { ConfigurationException } from '../src/exceptions';
 import { MicroframeworkSettings } from 'microbootstrap';
+import { loggersHelper, excludesHelper, typesHelper } from '../config/helper';
 
 const configuration = ConfigurationModule;
 
@@ -66,6 +67,67 @@ describe('Validate schema configuration', () => {
         }
 
         expect(() => validateConfiguration({ schema, configuration })).toThrow();
+    });
+});
+
+describe('Configuration Helper Unit Tests', () => {
+    test('Can parse the empty logger configuration', () => {
+        expect(loggersHelper(undefined)).toStrictEqual({});
+    });
+
+    test('Can parse the console logger configuration', () => {
+        expect(loggersHelper("console,error")).toStrictEqual({
+            console: {
+                enabled: true,
+                level: "error"
+            }
+        });
+    });
+
+    test('Can parse file logger configuration and log location', () => {
+        expect(loggersHelper("file,error,c:/logs,")).toStrictEqual({
+            file: {
+                enabled: true,
+                level: "error",
+                location: "c:/logs"
+            }
+        });
+    });
+
+    test('Can parse empty excludes in configuration', () => {
+        expect(excludesHelper(undefined)).toStrictEqual([]);
+    });
+
+    test('Can parse the section to exclude', () => {
+        expect(excludesHelper("balances")).toStrictEqual([{
+            section: "balances",
+            methods: undefined
+        }]);
+    });
+
+    test('Can parse the section and methods', () => {
+        expect(excludesHelper("balances=transfer,accounts,;")).toStrictEqual([{
+            section: "balances",
+            methods: [
+                "transfer",
+                "accounts"
+            ]
+        }]);
+    });
+
+    test('Can read the custom types', () => {
+        expect(typesHelper("tests/mock/types.json")).toStrictEqual({
+            Address: "AccountId",
+            LookupSource: "AccountId"
+        });
+    })
+
+    test('Can throw error for invalid JSON', () => {
+        expect(() => typesHelper("tests/mock/types-invalid.json")).toThrow();
+    })
+
+    test('Can return undefined for unavailable file', () => {
+        expect(typesHelper("tests/mock/types-unavailable.json")).toEqual(undefined);
     })
 });
 
