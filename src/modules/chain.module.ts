@@ -21,9 +21,11 @@ export const ChainModule: MicroframeworkLoader = async (frameworkSettings: Micro
 
 export const chainProvider = ({ endpoint, options }: { endpoint: string, options?: { reconnect : number | false }}) => {
     const wsOptions: any[] = [];
+
     if(options && has(options, "reconnect")) {
         wsOptions.push(options.reconnect);
     }
+    
     const wsProvider = new WsProvider(endpoint, ...wsOptions);
 
     return new ApiRx({
