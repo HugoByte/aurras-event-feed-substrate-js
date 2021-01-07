@@ -1,7 +1,7 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
 import { ConfigurationException } from '../src/exceptions';
 import { MicroframeworkSettings } from 'microbootstrap';
-import { loggersHelper, excludesHelper } from '../config/helper';
+import { loggersHelper, excludesHelper, typesHelper } from '../config/helper';
 
 const configuration = ConfigurationModule;
 
@@ -94,7 +94,7 @@ describe('Configuration helper Unit Tests', () => {
         });
     });
 
-    test('[excludesHelper] No excludes', () => {
+    test('[excludesHelper] No excludes provided', () => {
         expect(excludesHelper(undefined)).toStrictEqual([]);
     });
 
@@ -114,5 +114,20 @@ describe('Configuration helper Unit Tests', () => {
             ]
         }]);
     });
+
+    test('[typesHelper] Custom types provided to inject while chain intialization', () => {
+        expect(typesHelper("tests/mock/types.json")).toStrictEqual({
+            Address: "AccountId",
+            LookupSource: "AccountId"
+        });
+    })
+
+    test('[typesHelper] Custom types provided does not exist', () => {
+        expect(() => typesHelper("tests/mock/types-invalid.json")).toThrow();
+    })
+
+    test('[typesHelper] Throw error if invalid json provided', () => {
+        expect(typesHelper("tests/mock/types-unavailable.json")).toEqual(undefined);
+    })
 });
 

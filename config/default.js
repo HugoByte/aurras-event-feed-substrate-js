@@ -1,5 +1,5 @@
 const defer = require('config/defer').deferConfig;
-const { loggersHelper, excludesHelper } = require('./helper');
+const { loggersHelper, excludesHelper, typesHelper } = require('./helper');
 
 module.exports = {
     // Name of the chain
@@ -26,5 +26,11 @@ module.exports = {
 
     excludes: defer(function () {
         return excludesHelper(this.sectionMethodExcludes)
+    }),
+
+    typesLocation: undefined,
+
+    types: defer(function () {
+        return typesHelper(this.typesLocation);
     })
 }

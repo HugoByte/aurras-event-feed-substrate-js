@@ -1,4 +1,6 @@
 const _ = require('lodash');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     loggersHelper: function (loggerConfigurations) {
@@ -66,5 +68,19 @@ module.exports = {
         }, []);
 
         return sections;
+    },
+
+    typesHelper: function (typesLocation) {
+        if (typesLocation === undefined) return;
+
+        const location = path.resolve(typesLocation);
+        
+        try {
+            if (fs.existsSync(location)) return JSON.parse(fs.readFileSync(location, { encoding: 'utf8' }));
+        } catch(error) {
+            throw new Error("Failed to parse provided json");
+        }
+
+        return undefined;
     }
 }
