@@ -15,7 +15,7 @@ export const ChainModule: MicroframeworkLoader = async (frameworkSettings: Micro
     if (frameworkSettings) {
         const endpoint = get("chainEndpoint") as string;
 
-        Container.get(ChainService).Api = chainProvider({ endpoint });
+        Container.get(ChainService).api = chainProvider({ endpoint });
     }
 }
 
