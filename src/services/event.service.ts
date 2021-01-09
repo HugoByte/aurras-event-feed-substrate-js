@@ -9,7 +9,7 @@ export class EventService {
         forEach(records, (record) => {
             const { event } = record;
             const types = event.typeDef;
-            
+
             events.push({
                 section: event.section,
                 method: event.method,

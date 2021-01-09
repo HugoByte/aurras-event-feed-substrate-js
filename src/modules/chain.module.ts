@@ -25,7 +25,7 @@ export const chainProvider = ({ endpoint, options }: { endpoint: string, options
     if(options && has(options, "reconnect")) {
         wsOptions.push(options.reconnect);
     }
-    
+
     const wsProvider = new WsProvider(endpoint, ...wsOptions);
 
     return new ApiRx({

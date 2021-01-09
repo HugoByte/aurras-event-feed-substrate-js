@@ -5,4 +5,3 @@ export class EventException extends Exception {
       super('EventException', description, true);
     }
   }
-  
