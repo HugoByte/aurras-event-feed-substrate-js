@@ -15,8 +15,8 @@ export const ChainModule: MicroframeworkLoader = async (frameworkSettings: Micro
     if (frameworkSettings) {
         const endpoint = get("chainEndpoint") as string;
         const types = get("types") as any;
-
-        Container.get(ChainService).Api = chainProvider({ endpoint, types });
+      
+        Container.get(ChainService).api = chainProvider({ endpoint, types });
     }
 }
 
@@ -26,7 +26,7 @@ export const chainProvider = ({ endpoint, types, options }: { endpoint: string, 
     if(options && has(options, "reconnect")) {
         wsOptions.push(options.reconnect);
     }
-    
+
     const wsProvider = new WsProvider(endpoint, ...wsOptions);
 
     return new ApiRx({
