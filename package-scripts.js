@@ -28,7 +28,7 @@ module.exports = {
     test: {
       script: series(
         'nps banner.testUnit',
-        'jest --coverage'
+        'jest --coverage --detectOpenHandles'
       ),
       description: 'Runs unit tests'
     },
