@@ -38,5 +38,7 @@ module.exports = {
 
     kafkaBrokers: defer(function (){
         return kafkaBrokersHelper(this.kafkaBrokerConfigurations);
-    })
+    }),
+
+    kafkaTopic: undefined
 }

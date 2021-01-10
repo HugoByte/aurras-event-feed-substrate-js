@@ -142,4 +142,3 @@ describe('Configuration Helper Unit Tests', () => {
         ]);
     })
 });
-
