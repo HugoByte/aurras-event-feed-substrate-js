@@ -1,7 +1,7 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
 import { ConfigurationException } from '../src/exceptions';
 import { MicroframeworkSettings } from 'microbootstrap';
-import { loggersHelper, excludesHelper, typesHelper } from '../config/helper';
+import { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper } from '../config/helper';
 
 const configuration = ConfigurationModule;
 
@@ -128,6 +128,18 @@ describe('Configuration Helper Unit Tests', () => {
 
     test('Can return undefined for unavailable file', () => {
         expect(typesHelper("tests/mock/types-unavailable.json")).toEqual(undefined);
+    })
+
+    test('Can return empty array if no broker configuration provided', () => {
+        expect(kafkaBrokersHelper(undefined)).toStrictEqual([]);
+    })
+
+    test('Can parse the string and return array of brokers from the broker configuration provided', () => {
+        expect(kafkaBrokersHelper("kafka:9091;kafka:9092;kafka:9093;")).toStrictEqual([
+            "kafka:9091",
+            "kafka:9092",
+            "kafka:9093"
+        ]);
     })
 });
 

@@ -19,13 +19,14 @@ function createApi(): Promise<ApiPromise> {
 }
 
 describe('Events Module Unit Tests', () => {
-    test('Can get instance of Observable from chain service', async () => {
+    test('Can get instance of Observable from chain service', async (done) => {
         const chainService = new ChainService();
         chainService.api = createRxApi();
 
         expect(chainService.api).toBeInstanceOf(Observable);
 
         (await chainService.api.toPromise()).disconnect();
+        done();
     });
 
     test('Can listen to events from the chain', (done) => {
@@ -41,7 +42,7 @@ describe('Events Module Unit Tests', () => {
         })
     });
 
-    test('Can extract events from the chain', async () => {
+    test('Can extract events from the chain', async (done) => {
         const api = await createApi();
         const events = api.query.system.events();
         const eventService = new EventService();
@@ -49,6 +50,7 @@ describe('Events Module Unit Tests', () => {
         expect(eventService.getEvents(events)).toBeTruthy();
 
         api.disconnect();
+        done();
     });
 
     test('Can filter events from all methods of the section', async () => {

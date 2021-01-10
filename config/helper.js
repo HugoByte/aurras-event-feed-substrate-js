@@ -82,5 +82,21 @@ module.exports = {
         }
 
         return undefined;
+    },
+
+    kafkaBrokersHelper: function (kafkaBrokerConfigurations) {
+        // Split brokers config to get indepndent broker
+        var kafkaBrokers = _.split(_.trim(kafkaBrokerConfigurations), ";");
+
+        kafkaBrokers = _.reduce(kafkaBrokers, function (object, kafkaBrokerConfiguration) {
+            // Return the accumulator if the value is empty.
+            if (_.isEmpty(kafkaBrokerConfiguration)) return object;
+
+            object.push(kafkaBrokerConfiguration);
+
+            return object;
+        }, []);
+
+        return kafkaBrokers;
     }
 }
