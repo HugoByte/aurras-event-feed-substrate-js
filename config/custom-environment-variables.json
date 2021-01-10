@@ -2,5 +2,6 @@
     "chainName": "CHAIN_NAME",
     "chainEndpoint": "CHAIN_ENDPOINT",
     "loggerConfigurations": "LOGGERS",
-    "sectionMethodExcludes": "EXCLUDES"
+    "sectionMethodExcludes": "EXCLUDES",
+    "typesLocation": "TYPES_FILE"
 }
