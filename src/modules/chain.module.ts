@@ -14,12 +14,13 @@ import { has } from 'lodash';
 export const ChainModule: MicroframeworkLoader = async (frameworkSettings: MicroframeworkSettings | undefined) => {
     if (frameworkSettings) {
         const endpoint = get("chainEndpoint") as string;
+        const types = get("types") as any;
 
-        Container.get(ChainService).Api = chainProvider({ endpoint });
+        Container.get(ChainService).Api = chainProvider({ endpoint, types });
     }
 }
 
-export const chainProvider = ({ endpoint, options }: { endpoint: string, options?: { reconnect : number | false }}) => {
+export const chainProvider = ({ endpoint, types, options }: { endpoint: string, types: any, options?: { reconnect : number | false }}) => {
     const wsOptions: any[] = [];
 
     if(options && has(options, "reconnect")) {
@@ -29,7 +30,8 @@ export const chainProvider = ({ endpoint, options }: { endpoint: string, options
     const wsProvider = new WsProvider(endpoint, ...wsOptions);
 
     return new ApiRx({
-        provider: wsProvider
+        provider: wsProvider,
+        types
     })
         .isReady
         .pipe(
