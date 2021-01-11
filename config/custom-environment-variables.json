@@ -3,5 +3,7 @@
     "chainEndpoint": "CHAIN_ENDPOINT",
     "loggerConfigurations": "LOGGERS",
     "sectionMethodExcludes": "EXCLUDES",
-    "typesLocation": "TYPES_FILE"
+    "typesLocation": "TYPES_FILE",
+    "kafkaBrokerConfigurations": "KAFKA_BROKERS",
+    "kafkaTopic": "KAFKA_TOPIC"
 }

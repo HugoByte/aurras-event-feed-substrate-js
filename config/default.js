@@ -1,5 +1,5 @@
 const defer = require('config/defer').deferConfig;
-const { loggersHelper, excludesHelper, typesHelper } = require('./helper');
+const { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper } = require('./helper');
 
 module.exports = {
     // Name of the chain
@@ -32,5 +32,13 @@ module.exports = {
 
     types: defer(function () {
         return typesHelper(this.typesLocation);
-    })
+    }),
+
+    kafkaBrokerConfigurations: undefined,
+
+    kafkaBrokers: defer(function (){
+        return kafkaBrokersHelper(this.kafkaBrokerConfigurations);
+    }),
+
+    kafkaTopic: undefined
 }
