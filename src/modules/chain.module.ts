@@ -1,5 +1,5 @@
 import { MicrobootstrapSettings, MicrobootstrapLoader } from '@hugobyte/microbootstrap';
-import { get } from 'config';
+import { util } from 'config';
 import { Container } from 'typedi';
 import { WsProvider, ApiRx } from '@polkadot/api';
 import { shareReplay } from 'rxjs/operators';
@@ -13,10 +13,9 @@ import { has } from 'lodash';
 
 export const ChainModule: MicrobootstrapLoader = async (frameworkSettings: MicrobootstrapSettings | undefined) => {
     if (frameworkSettings) {
-        const endpoint = get("chainEndpoint") as string;
-        const types = get("types") as any;
+    const { chainEndpoint, types } = util.loadFileConfigs();
 
-        Container.get(ChainService).api = chainProvider({ endpoint, types });
+    Container.get(ChainService).api = chainProvider({ endpoint: chainEndpoint, types });
     }
 }
 

@@ -40,5 +40,8 @@ module.exports = {
         return kafkaBrokersHelper(this.kafkaBrokerConfigurations);
     }),
 
-    kafkaTopic: undefined
+    kafkaTopic: undefined,
+    openwhiskApiKey: undefined,
+    openwhiskApiHost: undefined,    
+    openwhiskNamespace: undefined
 }
