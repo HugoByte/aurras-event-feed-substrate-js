@@ -1,6 +1,6 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
 import { ConfigurationException } from '../src/exceptions';
-import { MicroframeworkSettings } from 'microbootstrap';
+import { MicrobootstrapSettings } from '@hugobyte/microbootstrap';
 import { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper } from '../config/helper';
 
 const configuration = ConfigurationModule;
@@ -16,11 +16,11 @@ describe('Configuration Unit Tests', () => {
         process.env.CHAIN_NAME = "chainname";
         process.env.CHAIN_ENDPOINT = "wss://localhost:9090";
         process.env.LOGGERS = "console,info;file,error,location";
-        expect(() => configuration(new MicroframeworkSettings(null))).toBeTruthy();
+        expect(() => configuration(new MicrobootstrapSettings(null))).toBeTruthy();
     });
 
     test('Should throw error for invalid configuration format', () => {
-        expect(() => configuration(new MicroframeworkSettings(null))).toThrow(ConfigurationException);
+        expect(() => configuration(new MicrobootstrapSettings(null))).toThrow(ConfigurationException);
     });
 });
 

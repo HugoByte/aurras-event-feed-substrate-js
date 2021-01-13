@@ -1,4 +1,4 @@
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microbootstrap';
+import { MicrobootstrapSettings, MicrobootstrapLoader } from '@hugobyte/microbootstrap';
 import { get } from 'config';
 import { Container } from 'typedi';
 import { WsProvider, ApiRx } from '@polkadot/api';
@@ -11,11 +11,11 @@ import { has } from 'lodash';
  * connection is implemented using the official provided @polkadot/api library.
  */
 
-export const ChainModule: MicroframeworkLoader = async (frameworkSettings: MicroframeworkSettings | undefined) => {
+export const ChainModule: MicrobootstrapLoader = async (frameworkSettings: MicrobootstrapSettings | undefined) => {
     if (frameworkSettings) {
         const endpoint = get("chainEndpoint") as string;
         const types = get("types") as any;
-      
+
         Container.get(ChainService).api = chainProvider({ endpoint, types });
     }
 }
