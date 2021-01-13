@@ -41,10 +41,7 @@ module.exports = {
     }),
 
     kafkaTopic: undefined,
-
     openwhiskApiKey: undefined,
-
-    openwhiskApiHost: undefined,
-    
+    openwhiskApiHost: undefined,    
     openwhiskNamespace: undefined
 }
