@@ -1,4 +1,4 @@
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microbootstrap';
+import { MicrobootstrapSettings, MicrobootstrapLoader } from '@hugobyte/microbootstrap';
 import { configure, format, transports } from 'winston';
 import { util } from 'config';
 
@@ -7,7 +7,7 @@ import { util } from 'config';
  * Should use a single instance of logger through out the application.
  */
 
-export const LoggerModule: MicroframeworkLoader = (frameworkSettings: MicroframeworkSettings | undefined) => {
+export const LoggerModule: MicrobootstrapLoader = (frameworkSettings: MicrobootstrapSettings | undefined) => {
     if (frameworkSettings) {
         const { chainName } = util.loadFileConfigs();
 
