@@ -1,5 +1,5 @@
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microbootstrap';
-import { get } from 'config';
+import { util } from 'config';
 import { Container } from 'typedi';
 import { WsProvider, ApiRx } from '@polkadot/api';
 import { shareReplay } from 'rxjs/operators';
@@ -13,10 +13,9 @@ import { has } from 'lodash';
 
 export const ChainModule: MicroframeworkLoader = async (frameworkSettings: MicroframeworkSettings | undefined) => {
     if (frameworkSettings) {
-        const endpoint = get("chainEndpoint") as string;
-        const types = get("types") as any;
-      
-        Container.get(ChainService).api = chainProvider({ endpoint, types });
+        const { chainEndpoint, types } = util.loadFileConfigs();
+     
+        Container.get(ChainService).api = chainProvider({ endpoint: chainEndpoint, types });
     }
 }
 

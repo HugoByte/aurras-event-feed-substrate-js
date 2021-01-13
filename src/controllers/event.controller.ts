@@ -4,7 +4,7 @@ import { EventException } from '@exceptions/index';
 import { ErrorHandler } from '@middlewares/error-handler.middleware';
 import { log } from 'winston';
 import { map, filter } from 'rxjs/operators';
-import { get } from 'config';
+import { util } from 'config';
 
 @Inject()
 export class EventController {
@@ -17,10 +17,11 @@ export class EventController {
     }
 
     public init() {
+        const { excludes } = util.loadFileConfigs();
         this.chainService.listenForEvents()
             .pipe(
                 map(this.eventService.getEvents),
-                map((events) => this.eventService.filterEvents(events, get("excludes"))),
+                map((events) => this.eventService.filterEvents(events, excludes)),
                 filter((events) => events.length > 0)
             )
             .subscribe(
