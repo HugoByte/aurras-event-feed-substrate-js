@@ -43,5 +43,6 @@ module.exports = {
     kafkaTopic: undefined,
     openwhiskApiKey: undefined,
     openwhiskApiHost: undefined,    
-    openwhiskNamespace: undefined
+    openwhiskNamespace: undefined,
+    eventReceiver: undefined
 }
