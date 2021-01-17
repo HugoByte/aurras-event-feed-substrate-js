@@ -18,13 +18,19 @@ export class EventController {
     }
 
     public init() {
-        const { excludes } = util.loadFileConfigs();
+        const { excludes, kafkaBrokers, kafkaTopic, eventReceiver } = util.loadFileConfigs();
         this.chainService.listenForEvents()
             .pipe(
                 map(this.eventService.getEvents),
                 map((events) => this.eventService.filterEvents(events, excludes)),
                 filter((events) => events.length > 0),
-                switchMap((events) => forkJoin(events.map((event) => this.eventService.triggerEventManager(event))))
+                switchMap(
+                    (events) => forkJoin(
+                        events.map(
+                            (event) => this.eventService.triggerEventManager({ event, brokers: kafkaBrokers, topic: kafkaTopic, trigger: eventReceiver })
+                        )
+                    )
+                )
             )
             .subscribe(
                 (result) => log("info", JSON.stringify(result)),
