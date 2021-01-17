@@ -92,7 +92,7 @@ describe('Events Module Unit Tests', () => {
         ]);
     });
 
-    test('Can filter events from specific methods of the section', async (done) => {
+    test('Can post events to trigger manager', async (done) => {
         const eventService = new EventService();
         const openwhiskApi = openwhisk({ apihost: "http://localhost:3233", api_key: "23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP", namespace: "guest" });
         const event = {
@@ -105,6 +105,7 @@ describe('Events Module Unit Tests', () => {
                 })
             }]
         }
+
         eventService.openwhiskApi = openwhiskApi;
         eventService.triggerEventManager({ brokers: ["localhost:9092"], topic: "subsrate", event, trigger: "receive-event" })
             .pipe(
@@ -116,7 +117,7 @@ describe('Events Module Unit Tests', () => {
             .subscribe((response) => {
                 expect(response.result).toStrictEqual({
                     brokers: ['localhost:9092'],
-                    message: 'Event Recieved from system',
+                    message: 'Event received from system',
                     topic: 'subsrate',
                     event: {
                         section: "system", 
