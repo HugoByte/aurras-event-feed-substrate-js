@@ -1,8 +1,20 @@
 import { Service } from "typedi";
 import { forEach, map, find, filter } from 'lodash';
+import * as openwhisk from 'openwhisk';
+import { from, Observable } from 'rxjs';
 
 @Service()
 export class EventService {
+    private _openwhiskApi!: openwhisk.Client;
+
+    public set openwhiskApi(value) {
+        this._openwhiskApi = value
+    }
+
+    public get openwhiskApi(): openwhisk.Client {
+        return this._openwhiskApi;
+    }
+
     public getEvents(records): any[] {
         const events: any = [];
 
@@ -33,5 +45,18 @@ export class EventService {
 
             return true;
         })
+    }
+
+    public triggerEventManager({ brokers, topic, event, trigger }): Observable<{
+        activationId: string
+    } | undefined> {
+        return from(this._openwhiskApi.triggers.invoke({
+            name: trigger,
+            params: {
+                brokers,
+                event,
+                topic
+            }
+        }))
     }
 }

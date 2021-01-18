@@ -1,12 +1,14 @@
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { WsProvider, ApiRx, ApiPromise } from '@polkadot/api';
 import { EventService, ChainService } from '../src/services';
+import openwhisk from 'openwhisk';
+import { switchMap, delay } from 'rxjs/operators';
 
 function createRxApi(): Observable<ApiRx> {
     jest.setTimeout(30000);
 
     const provider = new WsProvider('ws://localhost:9944');
-    
+
     return new ApiRx({ provider }).isReady;
 }
 
@@ -88,5 +90,44 @@ describe('Events Module Unit Tests', () => {
             { "section": "system", "method": "ExtrinsicSuccess" },
             { "section": "balance", "method": "ExtrinsicFailed" }
         ]);
+    });
+
+    test('Can post events to trigger manager', async (done) => {
+        const eventService = new EventService();
+        const openwhiskApi = openwhisk({ apihost: "http://localhost:3233", api_key: "23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP", namespace: "guest" });
+        const event = {
+            section: "system",
+            method: "ExtrinsicSuccess",
+            data: [{
+                DispatchInfo: JSON.stringify({
+                    weight: 159133000,
+                    class: "Mandatory"
+                })
+            }]
+        }
+
+        eventService.openwhiskApi = openwhiskApi;
+        eventService.triggerEventManager({ brokers: ["localhost:9092"], topic: "subsrate", event, trigger: "receive-event" })
+            .pipe(
+                delay(1000),
+                switchMap((response: any) => from(openwhiskApi.activations.logs({ name: response.activationId }))),
+                delay(1000),
+                switchMap((response: any) => from(openwhiskApi.activations.result({ name: JSON.parse(response.logs[0]).activationId })))
+            )
+            .subscribe((response) => {
+                expect(response.result).toStrictEqual({
+                    brokers: ['localhost:9092'],
+                    message: 'Event received from system',
+                    topic: 'subsrate',
+                    event: {
+                        section: "system", 
+                        method: "ExtrinsicSuccess", 
+                        data: [{
+                            DispatchInfo: "{\"weight\":159133000,\"class\":\"Mandatory\"}"
+                        }]
+                    }
+                })
+                done();
+            })
     });
 });
