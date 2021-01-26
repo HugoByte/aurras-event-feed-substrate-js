@@ -94,7 +94,7 @@ describe('Events Module Unit Tests', () => {
 
     test('Can post events to trigger manager', async (done) => {
         const eventService = new EventService();
-        const openwhiskApi = openwhisk({ apihost: "http://localhost:3233", api_key: "23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP", namespace: "guest" });
+        const openwhiskApi = openwhisk({ apihost: "https://localhost:31001", api_key: "23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP", namespace: "guest", ignore_certs: true });
         const event = {
             section: "system",
             method: "ExtrinsicSuccess",
@@ -107,15 +107,9 @@ describe('Events Module Unit Tests', () => {
         }
 
         eventService.openwhiskApi = openwhiskApi;
-        eventService.triggerEventManager({ brokers: ["localhost:9092"], topic: "subsrate", event, trigger: "receive-event" })
-            .pipe(
-                delay(1000),
-                switchMap((response: any) => from(openwhiskApi.activations.logs({ name: response.activationId }))),
-                delay(1000),
-                switchMap((response: any) => from(openwhiskApi.activations.result({ name: JSON.parse(response.logs[0]).activationId })))
-            )
+        eventService.invokeAction({ brokers: ["localhost:9092"], topic: "subsrate", event, action: "event-receiver" })
             .subscribe((response) => {
-                expect(response.result).toStrictEqual({
+                expect(response).toStrictEqual({
                     brokers: ['localhost:9092'],
                     message: 'Event received from system',
                     topic: 'subsrate',

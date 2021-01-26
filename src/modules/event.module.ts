@@ -13,7 +13,7 @@ export const EventModule: MicrobootstrapLoader = (frameworkSettings: Microbootst
     if (frameworkSettings) {
         const { openwhiskApiHost, openwhiskApiKey, openwhiskNamespace } = util.loadFileConfigs();
 
-        Container.get(EventService).openwhiskApi = openwhisk({ apihost: openwhiskApiHost, api_key: openwhiskApiKey, namespace: openwhiskNamespace});
+        Container.get(EventService).openwhiskApi = openwhisk({ apihost: openwhiskApiHost, api_key: openwhiskApiKey, namespace: openwhiskNamespace, ignore_certs: true});
         Container.get(EventController).init()
     }
 };
