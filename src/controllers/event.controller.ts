@@ -27,7 +27,7 @@ export class EventController {
                 switchMap(
                     (events) => forkJoin(
                         events.map(
-                            (event) => this.eventService.triggerEventManager({ event, brokers: kafkaBrokers, topic: kafkaTopic, trigger: eventReceiver })
+                            (event) => this.eventService.invokeAction({ event, brokers: kafkaBrokers, topic: kafkaTopic, action: eventReceiver })
                         )
                     )
                 )

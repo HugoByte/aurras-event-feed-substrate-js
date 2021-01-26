@@ -47,16 +47,16 @@ export class EventService {
         })
     }
 
-    public triggerEventManager({ brokers, topic, event, trigger }): Observable<{
-        activationId: string
-    } | undefined> {
-        return from(this._openwhiskApi.triggers.invoke({
-            name: trigger,
+    public invokeAction({ brokers, topic, event, action }): Observable<openwhisk.Dict | undefined> {
+        return from(this._openwhiskApi.actions.invoke({
+            name: action,
             params: {
                 brokers,
                 event,
                 topic
-            }
+            },
+            blocking: true,
+            result: true
         }))
     }
 }
