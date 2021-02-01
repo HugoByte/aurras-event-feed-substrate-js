@@ -1,5 +1,5 @@
 import { Exception, ConfigurationException } from '@exceptions/index';
-import { createLogger, transports, format } from "winston";
+import { createLogger, transports, format, log } from "winston";
 
 /**
  * Central Error Handling Logic.
@@ -27,6 +27,10 @@ class ErrorHandlerMiddleware {
             );
 
             logger.log("error", error.message);
+
+        } else {
+            // Use Configured logger
+            log("error", error.message);
         }
 
         // Exit the process if the error is not operational.

@@ -3,7 +3,7 @@ import { ChainService, EventService } from '@services/index';
 import { EventException } from '@exceptions/index';
 import { ErrorHandler } from '@middlewares/error-handler.middleware';
 import { log } from 'winston';
-import { map, filter, switchMap } from 'rxjs/operators';
+import { map, filter, switchMap, catchError } from 'rxjs/operators';
 import { util } from 'config';
 import { forkJoin } from 'rxjs';
 
@@ -22,6 +22,9 @@ export class EventController {
         this.chainService.listenForEvents()
             .pipe(
                 map(this.eventService.getEvents),
+                catchError((error) => {
+                    throw new EventException(`${error} from Polkadot API`)
+                }),
                 map((events) => this.eventService.filterEvents(events, excludes)),
                 filter((events) => events.length > 0),
                 switchMap(
@@ -30,7 +33,10 @@ export class EventController {
                             (event) => this.eventService.invokeAction({ event, brokers: kafkaBrokers, topic: kafkaTopic, action: eventReceiver })
                         )
                     )
-                )
+                ),
+                catchError((error) => {
+                    throw new EventException(`${error} from Openwhisk API`)
+                })
             )
             .subscribe(
                 (result) => log("info", JSON.stringify(result)),
