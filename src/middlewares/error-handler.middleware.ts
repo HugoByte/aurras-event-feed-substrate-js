@@ -27,7 +27,6 @@ class ErrorHandlerMiddleware {
             );
 
             logger.log("error", error.message);
-
         } else {
             // Use Configured logger
             log("error", error.message);
