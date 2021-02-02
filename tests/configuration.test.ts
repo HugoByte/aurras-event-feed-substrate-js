@@ -1,7 +1,9 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
-import { ConfigurationException } from '../src/exceptions';
+import { ConfigurationException, LoggerException } from '../src/exceptions';
 import { MicrobootstrapSettings } from '@hugobyte/microbootstrap';
 import { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper } from '../config/helper';
+import { getTransport } from '../src/helpers/logger.helper';
+import { transports } from 'winston';
 
 const configuration = ConfigurationModule;
 
@@ -89,7 +91,7 @@ describe('Configuration Helper Unit Tests', () => {
             file: {
                 enabled: true,
                 level: "error",
-                location: "c:/logs"
+                filename: "c:/logs"
             }
         });
     });
@@ -141,4 +143,15 @@ describe('Configuration Helper Unit Tests', () => {
             "kafka:9093"
         ]);
     })
+});
+
+describe('Logger Helper Unit Tests', () => {
+    test('Can throw error if logger transport provided is invalid', () => {
+        expect(() => getTransport('invalid', {}, 'label')).toThrow(LoggerException);
+    });
+    test('Can return console transport', () => {
+        expect(getTransport('console', {
+            level: "info"
+        }, 'label')).toBeInstanceOf(transports.Console);
+    });
 });
