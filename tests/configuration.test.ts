@@ -149,6 +149,7 @@ describe('Logger Helper Unit Tests', () => {
     test('Can throw error if logger transport provided is invalid', () => {
         expect(() => getTransport('invalid', {}, 'label')).toThrow(LoggerException);
     });
+
     test('Can return console transport', () => {
         expect(getTransport('console', {
             level: "info"
