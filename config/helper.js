@@ -29,7 +29,7 @@ module.exports = {
                 if (index === 2) {
                     // Map to get the option based on type of logger
                     const keyMap = {
-                        file: "location",
+                        file: "filename",
                     };
 
                     // keyMap[loggerType] to get the option based on the type of the logger

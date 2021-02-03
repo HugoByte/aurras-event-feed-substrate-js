@@ -37,6 +37,9 @@
       ],
       "@exceptions/*": [
         "./exceptions/*"
+      ],
+      "@helpers/*": [
+        "./helpers/*"
       ]
     },
     "allowSyntheticDefaultImports": true,

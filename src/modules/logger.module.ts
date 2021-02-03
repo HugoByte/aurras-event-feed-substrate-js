@@ -1,6 +1,8 @@
 import { MicrobootstrapSettings, MicrobootstrapLoader } from '@hugobyte/microbootstrap';
-import { configure, format, transports } from 'winston';
+import { configure } from 'winston';
 import { util } from 'config';
+import { getTransport } from '@helpers/index';
+import { reduce } from 'lodash';
 
 /**
  * Logger Module configures logger and adds logging transports. Transports and the logging levels are added through the Environment variable using the format `LOGGER=type,level[,parameters];type,level[,parameters];`. Using https://github.com/winstonjs/winston for logging.
@@ -9,23 +11,16 @@ import { util } from 'config';
 
 export const LoggerModule: MicrobootstrapLoader = (frameworkSettings: MicrobootstrapSettings | undefined) => {
     if (frameworkSettings) {
-        const { chainName } = util.loadFileConfigs();
+        const { chainName, loggers } = util.loadFileConfigs();
 
-        // TODO: Build transports using configuration provided through environment variable.
+        const transports = reduce(loggers, (accumlator: any[], logger, loggerType) => {
+            accumlator.push(getTransport(loggerType, logger, chainName));
+
+            return accumlator;
+        }, []);
+
         configure({
-            transports: [
-                new transports.Console({
-                    level: "info",
-                    handleExceptions: true,
-                    format: format.combine(
-                        format.label({ label: chainName}),
-                        format.colorize(),
-                        format.timestamp({format: 'DD-MM-YYYY hh:mm:ss a'}),
-                        format.printf(({ level, message, label, timestamp}) => `${timestamp} [${label}] ${level}: ${message}`),
-                    )
-                })
-                // TODO: Add Custom Transport to Logging service for Monitoring
-            ],
+            transports,
         });
     }
 }
