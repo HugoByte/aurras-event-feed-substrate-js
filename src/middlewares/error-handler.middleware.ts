@@ -27,6 +27,9 @@ class ErrorHandlerMiddleware {
             );
 
             logger.log("error", error.message);
+        } else {
+            // Use Configured logger
+            log("error", error.message);
         }
 
         // Exit the process if the error is not operational.
