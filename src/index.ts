@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { Bootstrap } from '@hugobyte/microbootstrap';
-import { LoggerModule, ConfigurationModule, ChainModule, EventModule } from '@modules/index';
+import { LoggerModule, ConfigurationModule, ChainModule, EventModule, HealthModule } from '@modules/index';
 import { log } from 'winston';
 import { ErrorHandler } from '@middlewares/index';
 
@@ -13,7 +13,8 @@ Bootstrap({
         ConfigurationModule,
         LoggerModule,
         ChainModule,
-        EventModule
+        EventModule,
+        HealthModule
     ],
 })
     .then((framework) => {
