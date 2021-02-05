@@ -1,7 +1,7 @@
 # Pull Request Template
 
 ## Description
-* Update readme document
+* Add description
 
 Please select the options that are relevant.
 
