@@ -122,7 +122,7 @@ Openwhisk authentication key.
 
 | Environment Variable | Sample Values |
 | :--- | :--- |
-| OPENWHISK\_API\_KEY | `OPENWHISK_API_KEY=cafebabe-cafe-babe-cafe-babecafebabe:007zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP` |
+| OPENWHISK\_API\_KEY | `OPENWHISK_API_KEY=23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP` |
 
 
 
@@ -132,7 +132,7 @@ Openwhisk API Endpoint
 
 | Environment Variable | Sample Values |
 | :--- | :--- |
-| OPENWHISK\_API\_HOST | `OPENWHISK_API_HOST=http://localhost:3232` |
+| OPENWHISK\_API\_HOST | `OPENWHISK_API_HOST=https://localhost:31001` |
 
 
 
@@ -142,4 +142,4 @@ Organization space where the actions, rules, and triggers related to aurras resi
 
 | Environment Variable | Sample Values |
 | :--- | :--- |
-| OPENWHISK\_NAMESPACE | `OPENWHISK_NAMESPACE=aurras` |
+| OPENWHISK\_NAMESPACE | `OPENWHISK_NAMESPACE=guest` |
