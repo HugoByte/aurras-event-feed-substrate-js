@@ -27,7 +27,7 @@ This Event Feed package facilitates to source events from substrate-based chains
 ### Prerequisites
 
 1. [Substrate Based Chain](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/)
-2. [Openwhisk](/docs/dependencies/openwhisk/)
+2. [Openwhisk](http://openwhisk.apache.org/)
 
 ### Installation
 
@@ -73,7 +73,7 @@ yarn test
 
 ### Deployment
 
-Deployment is done through either docker-compose or Kubernetes which can be found [here](/docs/deployment/).
+Deployment is done through either docker-compose or Kubernetes which can be found [here](https://docs.aurras.hugobyte.com/components/event-feed/event-feed-substrate/deployment).
 
 ### License
 Licensed under [Apache-2.0](./LICENSE)
