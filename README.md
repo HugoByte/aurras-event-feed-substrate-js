@@ -18,9 +18,11 @@
 -->
 # Event Feed - Substrate
 
-## Event Feed package to Source Events from Substrate based Chains
-
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
+### Introduction
+
+Aurras is a middleware that acts as an event processor and a low code workflow orchestration platform. Aurras is being pitched as a next-generation system for enabling decentralized push notification. This middleware solution listens to events from blockchain applications and propagates them to a registered pool of MQTT brokers. The broader architecture consists of parachain from which the middleware listens for the events.
 
 This Event Feed package facilitates to source events from substrate-based chains. The events will be posted to the OpenWhisk system. [polkadot-js/api](https://github.com/polkadot-js/api) is used under the hood to establish the connection to blockchain nodes and receive events.
 
