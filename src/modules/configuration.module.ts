@@ -1,4 +1,4 @@
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microbootstrap';
+import { MicrobootstrapSettings, MicrobootstrapLoader } from '@hugobyte/microbootstrap';
 import { util } from 'config';
 import { buildYup } from 'schema-to-yup';
 import { readFileSync } from 'fs';
@@ -11,21 +11,22 @@ import { ConfigurationException } from "@exceptions/index";
  * Config validation is done using https://github.com/jquense/yup.
  */
 
-export const ConfigurationModule: MicroframeworkLoader = (frameworkSettings: MicroframeworkSettings | undefined) => {
+export const ConfigurationModule: MicrobootstrapLoader = (frameworkSettings: MicrobootstrapSettings | undefined) => {
     if (frameworkSettings) {
         try {
-            // Read schema.json file from config directory.
             const schema = JSON.parse(readFileSync(join('config', 'schema.json'), { encoding: 'utf8' }));
+            const configuration = util.loadFileConfigs();
 
-            // Build Yup schema from the provided json schema.
-            const yupSchema = buildYup(schema, {});
-
-            // Using synchronous validation as we need to be sure that configuration are valid before loading other modules.
-            yupSchema.validateSync(util.loadFileConfigs());
+            validateConfiguration({ schema, configuration });
         }
         catch (error) {
-            if(typeof error === 'string') throw new ConfigurationException(error);
+            if (typeof error === 'string') throw new ConfigurationException(error);
             throw new ConfigurationException(error.message);
         }
     }
+}
+
+export const validateConfiguration = ({ schema, configuration }) => {
+    const yupSchema = buildYup(schema, {});
+    return yupSchema.validateSync(configuration)
 }

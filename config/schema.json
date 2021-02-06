@@ -4,13 +4,68 @@
     "type": "object",
     "title": "Substrate Event Feed Config",
     "properties": {
-        "name": {
+        "chainName": {
             "description": "Name of the chain",
             "type": "string",
-            "required": true,
             "matches": "[a-zA-Z]+",
             "min": 3,
             "maxLength": 40
+        },
+        "loggers": {
+            "type": "object",
+            "properties": {
+                "console": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "level": {
+                            "type": "string",
+                            "enum": [
+                                "info",
+                                "debug",
+                                "error",
+                                "warning"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "level"
+                    ]
+                },
+                "file": {
+                    "type": "object",
+                    "properties": {
+                        "level": {
+                            "type": "string",
+                            "enum": [
+                                "info",
+                                "debug",
+                                "error",
+                                "warning"
+                            ]
+                        },
+                        "filename": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "level",
+                        "filename"
+                    ]
+                }
+            }
+        },
+        "chainEndpoint" :{
+            "description": "Websocket endpoint of the chain node",
+            "type": "string",
+            "pattern": "^(ws|wss)://"
         }
-    }
+    },
+    "required": [
+        "chainName",
+        "loggers",
+        "chainEndpoint"
+    ]
 }

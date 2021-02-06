@@ -1,0 +1,5 @@
+# Excluded folders
+./node_modules
+./bin
+./coverage
+.vscode
