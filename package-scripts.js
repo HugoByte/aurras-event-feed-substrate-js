@@ -20,7 +20,7 @@ module.exports = {
     serve: {
       script: series(
         'nps banner.serve',
-        'nodemon --watch src --watch config'
+        'nodemon -r dotenv/config --watch src --watch config'
       ),
       description: 'Serves the current app and watches for changes to restart it'
     },
