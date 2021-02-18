@@ -57,7 +57,7 @@ yarn install
 
 Configurations are passed through environment variables which can be found [here](/docs/configuration.md).
 
-For local development and testing create a .env file with following contents
+For local development and testing create a .env file with following contents in the project root folder.
 
 ```text
 CHAIN_NAME=Node Template
