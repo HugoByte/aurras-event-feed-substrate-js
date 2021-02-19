@@ -152,3 +152,12 @@ Trigger Endpoint where the event should be posted.
 | Environment Variable | Sample Values |
 | :--- | :--- |
 | EVENT\_RECEIVER | `EVENT_RECEIVER=event-receiver` |
+
+
+#### HEALTH\_API\_PORT [Optional]
+
+Configuration for Health API port primarily used for Kubernetes readiness and liveness probe. Default port is 80.
+
+| Environment Variable | Sample Values |
+| :--- | :--- |
+| HEALTH\_API\_PORT | `HEALTH_API_PORT=8080` |
