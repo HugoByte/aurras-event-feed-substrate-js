@@ -9,5 +9,6 @@
     "openwhiskApiKey": "OPENWHISK_API_KEY",
     "openwhiskApiHost": "OPENWHISK_API_HOST",
     "openwhiskNamespace": "OPENWHISK_NAMESPACE",
-    "eventReceiver": "EVENT_RECEIVER"
+    "eventReceiver": "EVENT_RECEIVER",
+    "healthAPIPortConfiguration": "HEALTH_API_PORT"
 }
