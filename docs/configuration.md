@@ -148,7 +148,7 @@ Organization space where the actions, rules, and triggers related to aurras resi
 
 #### HEALTH\_API\_PORT [Optional]
 
-Configuration for Health API port primarily used for Kubernetes health probe. Default port is 80.
+Configuration for Health API port primarily used for Kubernetes readiness and liveness probe. Default port is 80.
 
 | Environment Variable | Sample Values |
 | :--- | :--- |
