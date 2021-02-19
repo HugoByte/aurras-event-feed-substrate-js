@@ -143,3 +143,12 @@ Organization space where the actions, rules, and triggers related to aurras resi
 | Environment Variable | Sample Values |
 | :--- | :--- |
 | OPENWHISK\_NAMESPACE | `OPENWHISK_NAMESPACE=guest` |
+
+
+#### EVENT\_RECEIVER [Mandatory]
+
+Trigger Endpoint where the event should be posted.
+
+| Environment Variable | Sample Values |
+| :--- | :--- |
+| EVENT\_RECEIVER | `EVENT_RECEIVER=event-receiver` |
