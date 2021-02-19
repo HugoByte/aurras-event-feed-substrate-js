@@ -45,9 +45,7 @@ describe('Validate schema configuration', () => {
             chainEndpoint: "wss://localhost"
         }
 
-        expect(validateConfiguration({ schema, configuration })).toStrictEqual({
-            chainEndpoint: "wss://localhost"
-        })
+        expect(validateConfiguration({ schema, configuration })).toStrictEqual(true)
     });
 
     test('Protocol of the chain endpoint property should be invalid', () => {

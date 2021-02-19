@@ -20,8 +20,8 @@ export const ConfigurationModule: MicrobootstrapLoader = (frameworkSettings: Mic
             validateConfiguration({ schema, configuration });
         }
         catch (error) {
-            if (typeof error === 'string') throw new ConfigurationException(error);
-            throw new ConfigurationException(error.message);
+            if (typeof error === 'string') throw new ConfigurationException("", error);
+            throw new ConfigurationException(error.dataPath, error.message);
         }
     }
 }
@@ -29,12 +29,12 @@ export const ConfigurationModule: MicrobootstrapLoader = (frameworkSettings: Mic
 export const validateConfiguration = ({ schema, configuration }) => {
     const ajv = new Ajv();
     const validate = ajv.compile(schema);
+    const isValidConfiguration = validate(configuration);
 
-    if(validate(configuration)) {
-        return;
-    } else {
+    if (!isValidConfiguration) {
         for (const error of validate.errors as DefinedError[]) {
             throw error;
-          }
+        }
     }
+    return isValidConfiguration;
 }

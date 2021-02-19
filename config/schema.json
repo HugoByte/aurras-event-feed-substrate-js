@@ -72,7 +72,10 @@
                         "type": "string"
                     },
                     "methods": {
-                        "type": ["array", "null"]
+                        "type": [
+                            "array",
+                            "null"
+                        ]
                     }
                 },
                 "required": [
@@ -107,6 +110,10 @@
         "eventReceiver": {
             "description": "Trigger Endpoint where the event should be posted",
             "type": "string"
+        },
+        "healthAPIPort": {
+            "type": "integer",
+            "description": "The binding port for the Health API Endpoint"
         }
     },
     "required": [
