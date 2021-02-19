@@ -57,15 +57,67 @@
                 }
             }
         },
-        "chainEndpoint" :{
+        "chainEndpoint": {
             "description": "Websocket endpoint of the chain node",
             "type": "string",
             "pattern": "^(ws|wss)://"
+        },
+        "excludes": {
+            "description": "Sections and Methods of a specific section to be excluded",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "section": {
+                        "type": "string"
+                    },
+                    "methods": {
+                        "type": ["array", "null"]
+                    }
+                },
+                "required": [
+                    "section"
+                ]
+            }
+        },
+        "types": {
+            "description": "custom types for the chain.",
+            "type": "object"
+        },
+        "kafkaBrokers": {
+            "description": "List of Kafka brokers where the event should be posted",
+            "type": "array"
+        },
+        "kafkaTopic": {
+            "description": "Kafka topic to which events to be posted",
+            "type": "string"
+        },
+        "openwhiskApiKey": {
+            "description": "Openwhisk authentication key",
+            "type": "string"
+        },
+        "openwhiskApiHost": {
+            "description": "Openwhisk API Endpoint",
+            "type": "string"
+        },
+        "openwhiskNamespace": {
+            "description": "Organization space where the actions, rules, and triggers related to aurras resides",
+            "type": "string"
+        },
+        "eventReceiver": {
+            "description": "Trigger Endpoint where the event should be posted",
+            "type": "string"
         }
     },
     "required": [
         "chainName",
         "loggers",
-        "chainEndpoint"
+        "chainEndpoint",
+        "kafkaBrokers",
+        "kafkaTopic",
+        "openwhiskApiKey",
+        "openwhiskApiHost",
+        "openwhiskNamespace",
+        "eventReceiver"
     ]
 }

@@ -8,7 +8,7 @@ import Ajv, { DefinedError } from "ajv"
 /**
  * Configuration Module validates the config passed through environment variables with the schema provided in /config/schema.json.
  * Config is parsed and loaded using https://github.com/lorenwest/node-config.
- * Config validation is done using https://github.com/jquense/yup.
+ * Config validation is done using https://github.com/ajv-validator/ajv.
  */
 
 export const ConfigurationModule: MicrobootstrapLoader = (frameworkSettings: MicrobootstrapSettings | undefined) => {
