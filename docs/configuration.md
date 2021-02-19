@@ -4,7 +4,7 @@ Configuration values below are passed through environment variables.
 
 
 
-#### CHAIN\_NAME
+#### CHAIN\_NAME [Mandatory]
 
 An alphanumeric string to identify the chain.
 
@@ -14,7 +14,7 @@ An alphanumeric string to identify the chain.
 
 
 
-#### CHAIN\_ENDPOINT
+#### CHAIN\_ENDPOINT [Mandatory]
 
 The Endpoint of the chain node to which the event feed should connect to. Protocols Supported: ws \(WebSocket\) and wss \(WebSocket Secure\)
 
@@ -40,7 +40,7 @@ The Endpoint of the chain node to which the event feed should connect to. Protoc
 
 
 
-#### LOGGERS
+#### LOGGERS [Mandatory]
 
 The configuration pertains to the loggers enabled for the event feed. This configuration is extensible to add multiple logging such as logging to a file, logging to console, logging to monitoring system based on different levels of logging. Winston is used under the hood. 
 
@@ -67,7 +67,7 @@ Multiple loggers can be provided separated by ";"
 
 
 
-#### EXCLUDES
+#### EXCLUDES [Optional]
 
 Sections or Methods of a specific section can be excluded provided through this configuration.
 
@@ -86,7 +86,7 @@ Multiple methods to be separated by ","
 
 
 
-#### TYPES\_FILE
+#### TYPES\_FILE [Optional]
 
 Location to custom types for the chain.
 
@@ -96,7 +96,7 @@ Location to custom types for the chain.
 
 
 
-#### KAFKA\_BROKERS
+#### KAFKA\_BROKERS [Mandatory]
 
 List of Kafka brokers where the event should be posted. separated by ";"
 
@@ -106,7 +106,7 @@ List of Kafka brokers where the event should be posted. separated by ";"
 
 
 
-#### KAFKA\_TOPIC
+#### KAFKA\_TOPIC [Mandatory]
 
 Kafka topic to which events to be posted ";"
 
@@ -116,7 +116,7 @@ Kafka topic to which events to be posted ";"
 
 
 
-#### OPENWHISK\_API\_KEY
+#### OPENWHISK\_API\_KEY [Mandatory]
 
 Openwhisk authentication key.
 
@@ -126,7 +126,7 @@ Openwhisk authentication key.
 
 
 
-#### OPENWHISK\_API\_HOST
+#### OPENWHISK\_API\_HOST [Mandatory]
 
 Openwhisk API Endpoint
 
@@ -136,7 +136,7 @@ Openwhisk API Endpoint
 
 
 
-#### OPENWHISK\_NAMESPACE
+#### OPENWHISK\_NAMESPACE [Mandatory]
 
 Organization space where the actions, rules, and triggers related to aurras resides.
 
