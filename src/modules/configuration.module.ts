@@ -33,8 +33,8 @@ export const validateConfiguration = ({ schema, configuration }) => {
     if(validate(configuration)) {
         return;
     } else {
-        for (const err of validate.errors as DefinedError[]) {
-            throw err;
+        for (const error of validate.errors as DefinedError[]) {
+            throw error;
           }
     }
 }
