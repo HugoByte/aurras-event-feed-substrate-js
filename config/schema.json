@@ -7,8 +7,8 @@
         "chainName": {
             "description": "Name of the chain",
             "type": "string",
-            "matches": "[a-zA-Z]+",
-            "min": 3,
+            "pattern": "[a-zA-Z]+",
+            "minLength": 3,
             "maxLength": 40
         },
         "loggers": {

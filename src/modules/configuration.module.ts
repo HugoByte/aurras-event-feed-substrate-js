@@ -1,9 +1,9 @@
 import { MicrobootstrapSettings, MicrobootstrapLoader } from '@hugobyte/microbootstrap';
 import { util } from 'config';
-import { buildYup } from 'schema-to-yup';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { ConfigurationException } from "@exceptions/index";
+import Ajv, { DefinedError } from "ajv"
 
 /**
  * Configuration Module validates the config passed through environment variables with the schema provided in /config/schema.json.
@@ -27,6 +27,14 @@ export const ConfigurationModule: MicrobootstrapLoader = (frameworkSettings: Mic
 }
 
 export const validateConfiguration = ({ schema, configuration }) => {
-    const yupSchema = buildYup(schema, {});
-    return yupSchema.validateSync(configuration)
+    const ajv = new Ajv();
+    const validate = ajv.compile(schema);
+
+    if(validate(configuration)) {
+        return;
+    } else {
+        for (const err of validate.errors as DefinedError[]) {
+            throw err;
+          }
+    }
 }
