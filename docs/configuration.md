@@ -143,3 +143,13 @@ Organization space where the actions, rules, and triggers related to aurras resi
 | Environment Variable | Sample Values |
 | :--- | :--- |
 | OPENWHISK\_NAMESPACE | `OPENWHISK_NAMESPACE=guest` |
+
+
+
+#### HEALTH\_API\_PORT [Optional]
+
+Configuration for Health API port primarily used for Kubernetes health probe. Default port is 80.
+
+| Environment Variable | Sample Values |
+| :--- | :--- |
+| HEALTH\_API\_PORT | `HEALTH_API_PORT=8080` |
