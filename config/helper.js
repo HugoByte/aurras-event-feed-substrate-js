@@ -98,5 +98,9 @@ module.exports = {
         }, []);
 
         return kafkaBrokers;
+    },
+
+    healthAPIPortHelper: function (healthAPIPortConfiguration) {
+        return parseInt(healthAPIPortConfiguration);
     }
 }

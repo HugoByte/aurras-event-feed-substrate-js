@@ -1,5 +1,5 @@
 const defer = require('config/defer').deferConfig;
-const { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper } = require('./helper');
+const { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper, healthAPIPortHelper } = require('./helper');
 
 module.exports = {
     // Name of the chain
@@ -44,5 +44,10 @@ module.exports = {
     openwhiskApiKey: undefined,
     openwhiskApiHost: undefined,    
     openwhiskNamespace: undefined,
-    eventReceiver: undefined
+    eventReceiver: undefined,
+    healthAPIPortConfiguration: "80",
+
+    healthAPIPort: defer(function (){
+        return healthAPIPortHelper(this.healthAPIPortConfiguration);
+    }),
 }
