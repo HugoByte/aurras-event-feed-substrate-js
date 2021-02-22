@@ -91,6 +91,8 @@ yarn test
 
 ### Deployment
 
+For local development you may use docker-compose configuration provided in [devcontainer](./devcontainer), This requires .env file created in root folder with urls resolving to host machine to access chain, openwhisk from the container. And custom chain type to be created in [devcontainer/config](./devcontainer/config)
+
 Deployment is done through either docker-compose or Kubernetes which can be found [here](https://docs.aurras.hugobyte.com/components/event-feed/event-feed-substrate/deployment).
 
 ### License
