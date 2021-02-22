@@ -3,3 +3,4 @@
 ./bin
 ./coverage
 .vscode
+./devcontainer

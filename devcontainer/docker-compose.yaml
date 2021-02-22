@@ -1,0 +1,10 @@
+version: '3.5'
+services:
+  aurras-event-feed-substrate:
+    build: ../
+    container_name: aurras-event-feed-substrate
+    env_file:
+      - ../.env
+    volumes:
+      - ./logs:/logs
+      - ./config:/config

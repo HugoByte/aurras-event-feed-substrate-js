@@ -120,3 +120,9 @@ dist
 
 #Build Output
 bin 
+
+# Dev Container Config
+./devcontainer/config
+
+# Dev Container Logs
+./devcontainer/logs
