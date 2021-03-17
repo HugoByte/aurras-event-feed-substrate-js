@@ -4,6 +4,12 @@ import { MicrobootstrapSettings } from '@hugobyte/microbootstrap';
 import { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper } from '../config/helper';
 import { getTransport } from '../src/helpers/logger.helper';
 import { transports } from 'winston';
+import { TypeRegistry } from '@polkadot/types';
+
+function requireUncached(module) {
+    delete require.cache[require.resolve(module)];
+    return require(module);
+}
 
 const configuration = ConfigurationModule;
 
@@ -153,4 +159,22 @@ describe('Logger Helper Unit Tests', () => {
             level: "info"
         }, 'label')).toBeInstanceOf(transports.Console);
     });
+});
+
+describe('Custom type Definition', () => {
+
+    test('Can return Cutom Type Address Definition', () => {
+        const nodeConfig = requireUncached('config');
+        const register = new TypeRegistry();
+        register.register(nodeConfig.types);
+        expect(register.getDefinition('Address')).toEqual("AccountId");
+    });
+
+    test('Can return Cutom Type LookupSource Definition', () => {
+        const nodeConfig = requireUncached('config');
+        const register = new TypeRegistry();
+        register.register(nodeConfig.types);
+        expect(register.getDefinition('LookupSource')).toEqual("AccountId");
+    });
+
 });

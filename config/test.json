@@ -1,3 +1,4 @@
 {
-    "chainName": "Test Chain"
+    "chainName": "Test Chain",
+    "typesLocation": "./tests/mock/types.json"
 }
