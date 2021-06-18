@@ -63,4 +63,21 @@ describe('Events Module Unit Tests', () => {
             "section": "system"
         }]);
     })
+
+    test('Can filter events with topics defined for the section', async () => {
+        const eventService = new EventService();
+        const mockEvents = [
+            { "section": "system", "method": "ExtrinsicSuccess" },
+            { "section": "system", "method": "ExtrinsicFailed" },
+            { "section": "balance", "method": "ExtrinsicFailed" },
+        ];
+        const topics = [{
+            "section": "balance",
+            "topic": "123456"
+        }];
+
+        expect(eventService.filterTopics(mockEvents, topics)).toStrictEqual([
+            { "section": "balance", "method": "ExtrinsicFailed", "topic": "123456" }
+        ]);
+    })
 });

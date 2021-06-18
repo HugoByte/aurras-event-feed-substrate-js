@@ -1,5 +1,5 @@
 const defer = require('config/defer').deferConfig;
-const { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper, healthAPIPortHelper } = require('./helper');
+const { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper, healthAPIPortHelper, topicsHelper } = require('./helper');
 
 module.exports = {
     // Name of the chain
@@ -33,21 +33,25 @@ module.exports = {
     types: defer(function () {
         return typesHelper(this.typesLocation);
     }),
-
     kafkaBrokerConfigurations: undefined,
 
-    kafkaBrokers: defer(function (){
+    kafkaBrokers: defer(function () {
         return kafkaBrokersHelper(this.kafkaBrokerConfigurations);
     }),
 
-    kafkaTopic: undefined,
     openwhiskApiKey: undefined,
-    openwhiskApiHost: undefined,    
+    openwhiskApiHost: undefined,
     openwhiskNamespace: undefined,
     eventReceiver: undefined,
     healthAPIPortConfiguration: "80",
 
-    healthAPIPort: defer(function (){
+    // Topics where specific section events will be produced
+    eventTopics: undefined,
+    topics: defer(function () {
+        return topicsHelper(this.eventTopics)
+    }),
+
+    healthAPIPort: defer(function () {
         return healthAPIPortHelper(this.healthAPIPortConfiguration);
     }),
 }

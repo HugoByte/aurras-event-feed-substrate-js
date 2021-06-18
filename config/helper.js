@@ -36,10 +36,10 @@ module.exports = {
                     object[loggerType][keyMap[loggerType]] = item;
                 }
                 return object;
-            }, {});
+            }, { });
 
             return _.assign(object, logger);
-        }, {});
+        }, { });
 
         return loggers;
     },
@@ -74,10 +74,10 @@ module.exports = {
         if (typesLocation === undefined) return;
 
         const location = path.resolve(typesLocation);
-        
+
         try {
             if (fs.existsSync(location)) return JSON.parse(fs.readFileSync(location, { encoding: 'utf8' }));
-        } catch(error) {
+        } catch (error) {
             throw new Error("Failed to parse provided json");
         }
 
@@ -99,8 +99,31 @@ module.exports = {
 
         return kafkaBrokers;
     },
-
     healthAPIPortHelper: function (healthAPIPortConfiguration) {
         return parseInt(healthAPIPortConfiguration);
+    },
+
+    topicsHelper: function (eventTopics) {
+        // Split topics
+        var topics = _.split(_.trim(eventTopics), ";");
+
+        topics = _.reduce(topics, function (object, eventTopic) {
+            // Return the accumulator if the value is empty.
+            if (_.isEmpty(eventTopic)) return object;
+
+            const eventTopicSplit = _.split(_.trim(eventTopic), "=");
+            const section = eventTopicSplit[0];
+            const topic = eventTopicSplit[1] ? eventTopicSplit[1] : undefined;
+
+            if (topic)
+                object.push({
+                    section,
+                    topic
+                });
+
+            return object;
+        }, []);
+
+        return topics
     }
 }

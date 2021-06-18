@@ -91,10 +91,6 @@
             "description": "List of Kafka brokers where the event should be posted",
             "type": "array"
         },
-        "kafkaTopic": {
-            "description": "Kafka topic to which events to be posted",
-            "type": "string"
-        },
         "openwhiskApiKey": {
             "description": "Openwhisk authentication key",
             "type": "string"
@@ -114,17 +110,35 @@
         "healthAPIPort": {
             "type": "integer",
             "description": "The binding port for the Health API Endpoint"
+        },
+        "topics": {
+            "description": "Section and the respective topics where the events to be posted",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "section": {
+                        "type": "string"
+                    },
+                    "topic": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "section",
+                    "topic"
+                ]
+            }
         }
     },
     "required": [
         "chainName",
         "loggers",
         "chainEndpoint",
-        "kafkaBrokers",
-        "kafkaTopic",
         "openwhiskApiKey",
         "openwhiskApiHost",
         "openwhiskNamespace",
-        "eventReceiver"
+        "eventReceiver",
+        "topics"
     ]
 }

@@ -102,17 +102,19 @@ List of Kafka brokers where the event should be posted. separated by ";"
 
 | Environment Variable | Sample Values |
 | :--- | :--- |
-| KAFKA\_BROKERS | `KAFKA_BROKERS=localhost:9091;localhost:9092` |
+| KAFKA\_BROKERS | `KAFKA_BROKERS=172.17.0.1:9092` |
 
 
 
-#### KAFKA\_TOPIC [Mandatory]
+#### TOPICS [Mandatory]
 
-Kafka topic to which events to be posted ";"
+Topic to which events from certain sections to be posted ";"
+
+Multiple sections with topic can be provided separated by ";"
 
 | Environment Variable | Sample Values |
 | :--- | :--- |
-| KAFKA\_TOPIC | `KAFKA_TOPIC=substrate` |
+| TOPICS | `TOPICS=balances=c76b7a5d-d18a-43e6-a28f-db6bb7520986` |
 
 
 
@@ -147,7 +149,7 @@ Organization space where the actions, rules, and triggers related to aurras resi
 
 #### EVENT\_RECEIVER [Mandatory]
 
-Trigger Endpoint where the event should be posted.
+Action which accepts events from feeds.
 
 | Environment Variable | Sample Values |
 | :--- | :--- |

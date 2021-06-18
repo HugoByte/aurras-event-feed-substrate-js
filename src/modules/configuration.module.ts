@@ -19,7 +19,7 @@ export const ConfigurationModule: MicrobootstrapLoader = (frameworkSettings: Mic
 
             validateConfiguration({ schema, configuration });
         }
-        catch (error) {
+        catch (error: any) {
             if (typeof error === 'string') throw new ConfigurationException("", error);
             throw new ConfigurationException(error.dataPath, error.message);
         }

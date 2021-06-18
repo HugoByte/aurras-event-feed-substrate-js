@@ -60,13 +60,13 @@ Configurations are passed through environment variables which can be found [here
 For local development and testing create a **.env** file with respective configurations in the project root folder.
 
 ```text
-CHAIN_NAME=Node Template
-CHAIN_ENDPOINT=ws://localhost:9944
-LOGGERS=console,info;file,error,/logs/event-feed.log
-EXCLUDES=system
-TYPES_FILE=/configs/types.json
-KAFKA_BROKERS=localhost:9092
-KAFKA_TOPIC=node-template-topic
+CHAIN_NAME=Polkadot
+CHAIN_ENDPOINT=wss://rpc.polkadot.io
+LOGGERS=console,info;file,error,./logs/event-feed.log
+EXCLUDES=system;balances=Deposit,Endowed,DustLost;
+TYPES_FILE=/config/types.json
+KAFKA_BROKERS=172.17.0.1:9092
+TOPICS=balances=c76b7a5d-d18a-43e6-a28f-db6bb7520986
 OPENWHISK_API_KEY=23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP
 OPENWHISK_API_HOST=https://localhost:31001
 OPENWHISK_NAMESPACE=guest

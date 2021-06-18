@@ -21,7 +21,6 @@ export class EventService {
         forEach(records, (record) => {
             const { event } = record;
             const types = event.typeDef;
-
             events.push({
                 section: event.section,
                 method: event.method,
@@ -47,16 +46,23 @@ export class EventService {
         })
     }
 
+    public filterTopics(events, topics): any[] {
+        return filter(map(events, (event) => {
+            const topic = find(topics, (topic: any) => event.section === topic.section);
+            if (topic) event.topic = topic.topic;
+
+            return event;
+        }), (event) => event.topic !== undefined)
+    }
+
     public invokeAction({ brokers, topic, event, action }): Observable<openwhisk.Dict | undefined> {
         return from(this._openwhiskApi.actions.invoke({
             name: action,
             params: {
                 brokers,
-                event,
+                event: JSON.stringify(event),
                 topic
-            },
-            blocking: true,
-            result: true
+            }
         }))
     }
 }

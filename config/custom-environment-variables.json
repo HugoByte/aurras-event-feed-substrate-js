@@ -5,10 +5,10 @@
     "sectionMethodExcludes": "EXCLUDES",
     "typesLocation": "TYPES_FILE",
     "kafkaBrokerConfigurations": "KAFKA_BROKERS",
-    "kafkaTopic": "KAFKA_TOPIC",
     "openwhiskApiKey": "OPENWHISK_API_KEY",
     "openwhiskApiHost": "OPENWHISK_API_HOST",
     "openwhiskNamespace": "OPENWHISK_NAMESPACE",
     "eventReceiver": "EVENT_RECEIVER",
-    "healthAPIPortConfiguration": "HEALTH_API_PORT"
+    "healthAPIPortConfiguration": "HEALTH_API_PORT",
+    "eventTopics": "TOPICS"
 }

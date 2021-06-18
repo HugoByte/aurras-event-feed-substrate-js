@@ -1,15 +1,10 @@
 import { ConfigurationModule, validateConfiguration } from '../src/modules/configuration.module';
 import { ConfigurationException, LoggerException } from '../src/exceptions';
 import { MicrobootstrapSettings } from '@hugobyte/microbootstrap';
-import { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper } from '../config/helper';
+import { loggersHelper, excludesHelper, typesHelper, kafkaBrokersHelper, topicsHelper } from '../config/helper';
 import { getTransport } from '../src/helpers/logger.helper';
 import { transports } from 'winston';
-import { TypeRegistry } from '@polkadot/types';
 
-function requireUncached(module) {
-    delete require.cache[require.resolve(module)];
-    return require(module);
-}
 
 const configuration = ConfigurationModule;
 
@@ -78,7 +73,7 @@ describe('Validate schema configuration', () => {
 
 describe('Configuration Helper Unit Tests', () => {
     test('Can parse the empty logger configuration', () => {
-        expect(loggersHelper(undefined)).toStrictEqual({});
+        expect(loggersHelper(undefined)).toStrictEqual({ });
     });
 
     test('Can parse the console logger configuration', () => {
@@ -147,11 +142,22 @@ describe('Configuration Helper Unit Tests', () => {
             "kafka:9093"
         ]);
     })
+
+    test('Can parse the string and return array of section topic map from the topic configuration provided', () => {
+        expect(topicsHelper("balance=123456;system=56789;")).toStrictEqual([{
+            "section": "balance",
+            "topic": "123456",
+        },
+        {
+            "section": "system",
+            "topic": "56789",
+        }]);
+    })
 });
 
 describe('Logger Helper Unit Tests', () => {
     test('Can throw error if logger transport provided is invalid', () => {
-        expect(() => getTransport('invalid', {}, 'label')).toThrow(LoggerException);
+        expect(() => getTransport('invalid', { }, 'label')).toThrow(LoggerException);
     });
 
     test('Can return console transport', () => {
@@ -159,22 +165,4 @@ describe('Logger Helper Unit Tests', () => {
             level: "info"
         }, 'label')).toBeInstanceOf(transports.Console);
     });
-});
-
-describe('Custom type Definition', () => {
-
-    test('Can return Cutom Type Address Definition', () => {
-        const nodeConfig = requireUncached('config');
-        const register = new TypeRegistry();
-        register.register(nodeConfig.types);
-        expect(register.getDefinition('Address')).toEqual("AccountId");
-    });
-
-    test('Can return Cutom Type LookupSource Definition', () => {
-        const nodeConfig = requireUncached('config');
-        const register = new TypeRegistry();
-        register.register(nodeConfig.types);
-        expect(register.getDefinition('LookupSource')).toEqual("AccountId");
-    });
-
 });
