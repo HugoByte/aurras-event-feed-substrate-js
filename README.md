@@ -71,6 +71,7 @@ OPENWHISK_API_KEY=23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFp
 OPENWHISK_API_HOST=https://localhost:31001
 OPENWHISK_NAMESPACE=guest
 EVENT_RECEIVER=event-receiver
+EVENT_PROCESSOR=substrate-event-processor
 ```
 
 ### Usage

@@ -10,5 +10,6 @@
     "openwhiskNamespace": "OPENWHISK_NAMESPACE",
     "eventReceiver": "EVENT_RECEIVER",
     "healthAPIPortConfiguration": "HEALTH_API_PORT",
-    "eventTopics": "TOPICS"
+    "eventTopics": "TOPICS",
+    "eventProcessor": "EVENT_PROCESSOR"
 }

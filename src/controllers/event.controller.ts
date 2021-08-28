@@ -18,7 +18,7 @@ export class EventController {
     }
 
     public init() {
-        const { excludes, kafkaBrokers, topics, eventReceiver } = util.loadFileConfigs();
+        const { excludes, kafkaBrokers, topics, eventReceiver, eventProcessor } = util.loadFileConfigs();
         this.chainService.listenForEvents()
             .pipe(
                 map(this.eventService.getEvents),
@@ -32,7 +32,7 @@ export class EventController {
                     (events) => forkJoin(
                         events.map(
                             (event) => {
-                                return this.eventService.invokeAction({ event, brokers: kafkaBrokers, topic: event.topic, action: eventReceiver })
+                                return this.eventService.invokeAction({ event, brokers: kafkaBrokers, topic: event.topic, action: eventReceiver, eventProcessor })
                                     .pipe(
                                         catchError(error => of(new EventException(`${error} from Openwhisk API`)))
                                     )

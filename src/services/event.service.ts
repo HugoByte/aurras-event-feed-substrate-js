@@ -55,13 +55,14 @@ export class EventService {
         }), (event) => event.topic !== undefined)
     }
 
-    public invokeAction({ brokers, topic, event, action }): Observable<openwhisk.Dict | undefined> {
+    public invokeAction({ brokers, topic, event, action, eventProcessor }): Observable<openwhisk.Dict | undefined> {
         return from(this._openwhiskApi.actions.invoke({
             name: action,
             params: {
                 brokers,
                 event: JSON.stringify(event),
-                topic
+                topic,
+                eventProcessor
             }
         }))
     }

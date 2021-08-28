@@ -51,6 +51,9 @@ module.exports = {
         return topicsHelper(this.eventTopics)
     }),
 
+    // Action which parses the event
+    eventProcessor: undefined,
+
     healthAPIPort: defer(function () {
         return healthAPIPortHelper(this.healthAPIPortConfiguration);
     }),

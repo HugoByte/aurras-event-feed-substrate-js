@@ -156,6 +156,15 @@ Action which accepts events from feeds.
 | EVENT\_RECEIVER | `EVENT_RECEIVER=event-receiver` |
 
 
+#### EVENT\_PROCESSOR [Mandatory]
+
+Action which is responsible for parsing the events to generic specification.
+
+| Environment Variable | Sample Values |
+| :--- | :--- |
+| EVENT\_PROCESSOR | `EVENT_PROCESSOR=substrate-event-processor` |
+
+
 #### HEALTH\_API\_PORT [Optional]
 
 Configuration for Health API port primarily used for Kubernetes readiness and liveness probe. Default port is 80.

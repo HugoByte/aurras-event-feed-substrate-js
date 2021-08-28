@@ -129,6 +129,10 @@
                     "topic"
                 ]
             }
+        },
+        "eventProcessor": {
+            "description": "Event Processor",
+            "type": "string"
         }
     },
     "required": [
@@ -139,6 +143,7 @@
         "openwhiskApiHost",
         "openwhiskNamespace",
         "eventReceiver",
+        "eventProcessor",
         "topics"
     ]
 }
