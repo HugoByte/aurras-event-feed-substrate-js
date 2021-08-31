@@ -10,7 +10,7 @@ An alphanumeric string to identify the chain.
 
 | Environment Variable | Sample Values |
 | :--- | :--- |
-| CHAIN\_NAME | `CHAIN_NAME=polkadot` |
+| CHAIN\_NAME | `CHAIN_NAME=Node Template` |
 
 
 

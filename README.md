@@ -60,8 +60,8 @@ Configurations are passed through environment variables which can be found [here
 For local development and testing create a **.env** file with respective configurations in the project root folder.
 
 ```text
-CHAIN_NAME=Polkadot
-CHAIN_ENDPOINT=wss://rpc.polkadot.io
+CHAIN_NAME=Node Template
+CHAIN_ENDPOINT=ws://localhost:9944
 LOGGERS=console,info;file,error,./logs/event-feed.log
 EXCLUDES=system;balances=Deposit,Endowed,DustLost;
 TYPES_FILE=/config/types.json
