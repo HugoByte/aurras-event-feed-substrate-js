@@ -48,7 +48,7 @@ export class EventService {
 
     public filterTopics(events, topics): any[] {
         return filter(map(events, (event) => {
-            const topic = find(topics, (topic: any) => event.section === topic.section);
+            const topic = find(topics, (item: any) => event.section === item.section);
             if (topic) event.topic = topic.topic;
 
             return event;
