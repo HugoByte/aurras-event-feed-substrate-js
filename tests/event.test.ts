@@ -46,7 +46,7 @@ describe('Events Module Unit Tests', () => {
                     "section": "system",
                     "method": "ExtrinsicSuccess",
                     "meta": {
-                        "documentation": "Test event"
+                        "docs": "Test event"
                     },
                     "typeDef": [{ displayName: undefined, info: 6, name: undefined, type: 'DispatchInfo' }],
                     "data": [{ toString: () => '{ "weight": 159133000, "class": "Mandatory", "paysFee": "Yes" }' }]

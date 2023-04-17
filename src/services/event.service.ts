@@ -24,7 +24,7 @@ export class EventService {
             events.push({
                 section: event.section,
                 method: event.method,
-                meta: event.meta.documentation.toString(),
+                meta: event.meta.docs.toString(),
                 data: map(event.data, (value, index) => ({ [types[index].type]: value.toString() }))
             });
         })
