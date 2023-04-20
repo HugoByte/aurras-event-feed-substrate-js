@@ -1,4 +1,4 @@
-FROM node:14.17.5-stretch-slim
+FROM node:16-alpine3.16
 
 # Define working directory
 WORKDIR /app

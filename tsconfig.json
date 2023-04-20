@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",
     "module": "commonjs",
+    "target": "es6",
+    "skipLibCheck": true,
     "pretty": true,
     "sourceMap": true,
     "outDir": "./bin",
-    "importHelpers": false,
+    "declaration": true,
+    "importHelpers": true,
     "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": true,

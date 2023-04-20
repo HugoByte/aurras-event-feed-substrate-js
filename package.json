@@ -30,7 +30,7 @@
     "tscpaths": "^0.0.9",
     "tslib": "^2.0.3",
     "tslint": "^6.1.3",
-    "typescript": "^4.1.3"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "@hugobyte/microbootstrap": "^0.1.2",
